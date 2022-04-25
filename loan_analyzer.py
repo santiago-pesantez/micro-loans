@@ -92,10 +92,13 @@ print(f"With a discount rate of: {discount_rate*100:.2f}%, the present value is:
 # YOUR CODE HERE!
 print(f"Present value: ${present_value:.2f}")
 print(f"Loan price: ${float(loan.get('loan_price')):.2f}")
+
 if present_value >= loan.get("loan_price"):
     print(f"The loan is worth at least the cost to buy it.")
 else:
-    print(f"The loan is too expensive and not worth the price")
+    print(f"The loan is too expensive and not worth the price.")
+
+print("")
 
 """Part 3: Perform Financial Calculations.
 
@@ -115,18 +118,33 @@ new_loan = {
     "repayment_interval": "bullet",
     "future_value": 1000,
 }
-
+print("*** Part 3: Perform Financial Calculations ***")
 # @TODO: Define a new function that will be used to calculate present value.
 #    This function should include parameters for `future_value`, `remaining_months`, and the `annual_discount_rate`
 #    The function should return the `present_value` for the loan.
 # YOUR CODE HERE!
-
+def calculate_present_value(future_value, remaining_months, annual_discount_rate):
+    present_value = future_value / (1 + annual_discount_rate/12) ** remaining_months
+    return present_value
 
 # @TODO: Use the function to calculate the present value of the new loan given below.
 #    Use an `annual_discount_rate` of 0.2 for this new loan calculation.
 # YOUR CODE HERE!
-#print(f"The present value of the loan is: {present_value}")
+# print(f"The present value of the loan is: ${present_value:.2f}")
 
+remaining_months = new_loan["remaining_months"]
+future_value = new_loan["future_value"]
+annual_discount_rate = 0.2
+
+print("New loan information")
+print(f"Remaining months: {remaining_months}")
+print(f"Future value: ${future_value:.2f}")
+print(f"Annual discount rate: {(discount_rate*100):.2f}%")
+
+new_present_value = calculate_present_value(float(future_value), float(remaining_months), float(annual_discount_rate))
+
+print(f"The present value of the new loan is: ${new_present_value:.2f}")
+print("")
 
 """Part 4: Conditionally filter lists of loans.
 
@@ -165,7 +183,7 @@ loans = [
         "future_value": 1000,
     },
 ]
-
+print("*** Part 4: Conditionally filter lists of loans ***")
 # @TODO: Create an empty list called `inexpensive_loans`
 # YOUR CODE HERE!
 
